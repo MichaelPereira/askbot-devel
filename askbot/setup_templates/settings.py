@@ -20,12 +20,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'postgresql_psycopg2' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASE_ENGINE = 'mysql' # only postgres (>8.3) and mysql are supported so far others have not been tested yet
+DATABASE_NAME = os.environ.get('DATABASE_NAME', '')             # Or path to database file if using sqlite3.
+DATABASE_USER = os.environ.get('DATABASE_USER', '')             # Not used with sqlite3.
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD', '')     # Not used with sqlite3.
+DATABASE_HOST = os.environ.get('DATABASE_HOST', '')             # Set to empty string for localhost. Not used with sqlite3.
+DATABASE_PORT = os.environ.get('DATABASE_PORT', '')             # Set to empty string for default. Not used with sqlite3.
 
 #outgoing mail server settings
 SERVER_EMAIL = ''
@@ -45,7 +45,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 SITE_ID = 1
 

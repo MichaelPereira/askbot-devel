@@ -22,6 +22,7 @@ html5lib==0.9999999
 jsonfield<=1.0.3
 markdown2<=2.3.1
 mock==1.0.1
+mysql-python
 oauth2<=1.9.0.post1
 pyjwt<=1.4.0
 pystache==0.3.1

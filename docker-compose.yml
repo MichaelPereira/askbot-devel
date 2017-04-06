@@ -1,0 +1,38 @@
+version: "2.1"
+services:
+  demo:
+    build:
+      context: .
+      args:
+        - ASKBOT_DATABASE_ENGINE=3
+        - ASKBOT_DATABASE_NAME=demo_db
+        - ASKBOT_DATABASE_USER=simpleuser
+        - ASKBOT_DATABASE_PASSWORD=simpleuserpassword
+    links:
+      - mysql
+    volumes:
+      - ./:/app
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_USER=simpleuser
+      - DATABASE_PASSWORD=simpleuserpassword
+      - DATABASE_NAME=demo_db
+      - PYTHONPATH=/src
+      - DATABASE_PORT=3306
+    command: bash -c "askbot-setup --dir-name=. --db-engine=$${ASKBOT_DATABASE_ENGINE:-2} --db-name=$${ASKBOT_DATABASE_NAME:-db.sqlite} --db-user=$${ASKBOT_DATABASE_USER} --db-password=$${ASKBOT_DATABASE_PASSWORD} && sed -i \"ROOT_URLCONF.*/ROOT_URLCONF = 'urls'\" settings.py && python manage.py migrate --noinput && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8080"
+    ports:
+      - "8080:8080"
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping","-uroot", "-prootpassword", "--silent"]
+      interval: 1s
+      timeout: 10s
+      retries: 3
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=demo_db
+      - MYSQL_USER=simpleuser
+      - MYSQL_PASSWORD=simpleuserpassword
