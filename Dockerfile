@@ -1,10 +1,12 @@
 FROM python:2
 
 ENV PYTHONUNBUFFERED 1
+WORKDIR /src/
+
+ADD askbot_requirements.txt /src/askbot_requirements.txt
+RUN pip install -r askbot_requirements.txt
 
 ADD . /src/
-WORKDIR /src/
-RUN pip install -r askbot_requirements.txt
 RUN python setup.py install
 
 RUN mkdir /site/
