@@ -1,0 +1,17 @@
+FROM python:2-alpine
+
+WORKDIR /askbot
+
+RUN apk update && apk add \
+    gcc \
+    linux-headers \
+    musl-dev \
+    zlib-dev \
+    jpeg-dev
+
+ADD askbot_requirements.txt .
+RUN pip install -r askbot_requirements.txt
+
+ADD . .
+
+RUN pip install -e .
