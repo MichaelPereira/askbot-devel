@@ -1604,7 +1604,8 @@ class Thread(models.Model):
         if modified_tags:
             Tag.objects.update_use_counts(modified_tags)
             signals.tags_updated.send(None, thread=self, tags=modified_tags,
-                                      user=user, timestamp=timestamp)
+                                      new_tags=added_tagnames, user=user,
+                                      timestamp=timestamp)
             return True
 
         return False

@@ -18,7 +18,7 @@ GenericSignal = namedtuple(
 
 
 tags_updated = django.dispatch.Signal(
-    providing_args=['tags', 'user', 'timestamp'])
+    providing_args=['tags', 'new_tags', 'user', 'timestamp'])
 
 after_post_removed = django.dispatch.Signal(
     providing_args=['instance', 'deleted_by'])
